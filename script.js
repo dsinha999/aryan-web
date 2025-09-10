@@ -27,7 +27,16 @@
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  const marker = L.marker([CONFIG.latitude, CONFIG.longitude]).addTo(map);
+  // Custom rounded marker using a divIcon
+  const roundedIcon = L.divIcon({
+    className: 'rounded-marker',
+    html: '<div class="marker-circle">AY</div>',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12]
+  });
+
+  const marker = L.marker([CONFIG.latitude, CONFIG.longitude], { icon: roundedIcon }).addTo(map);
   marker.bindPopup(`${CONFIG.shopName}<br/>${CONFIG.shopLocationText}`).openPopup();
 
   // Helper to programmatically update location later
